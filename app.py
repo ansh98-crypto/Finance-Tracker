@@ -11,7 +11,7 @@ options = st.selectbox('Please Select', ['PowerBI', 'Generate and Clean Data and
 
 if options == 'PowerBI':
     print("Getting Report Data")
-    st.markdown('<iframe title="PF_BI" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=9bbce1d9-7bcc-4ead-9ce6-f5cf6446778b&autoAuth=true&ctid=d9ea170a-8537-4b78-9cb4-664401b48d6f" frameborder="0" allowFullScreen="true"></iframe>',unsafe_allow_html=True)
+    st.markdown('<iframe title="PF_BI - Git" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=49a3932e-6e4f-4f51-8611-f42b1cae25bb&autoAuth=true&ctid=d9ea170a-8537-4b78-9cb4-664401b48d6f" frameborder="0" allowFullScreen="true"></iframe>',unsafe_allow_html=True)
 
 elif options == 'Generate and Clean Data and Run SQL':
     print("Cleaning Data")
