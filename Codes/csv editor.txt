@@ -1,0 +1,33 @@
+Sub save_data_to_existing_CSV()
+
+
+Dim csvName As String
+Dim copy_rng As Range
+Dim myWB As Workbook
+Dim csvWB As Workbook
+Application.DisplayAlerts = False
+
+On Error GoTo err
+
+Set myWB = ThisWorkbook
+csvName = myWB.Path & "\" & "PFcsv" & ".csv"
+Set copy_rng = myWB.Worksheets(1).Range("A:Z")
+copy_rng.Copy
+Set csvWB = Application.Workbooks.Open(csvName)
+
+With csvWB
+.Worksheets(1).Range("A1").PasteSpecial Paste:=xlPasteValues
+.SaveAs Filename:=csvName, FileFormat:=xlCSV, CreateBackup:=False
+.Close
+End With
+
+
+err:
+Application.DisplayAlerts = True
+
+
+End Sub
+
+
+
+

@@ -1,0 +1,54 @@
+Sub statement_reader()
+
+Dim statName As String
+Dim copy_rng As Range
+Dim myWB As Workbook
+Dim statWB As Workbook
+Dim ws As Worksheet
+Dim last_row As Integer
+Dim last_row_stat As Integer
+Dim i As Integer
+
+
+Application.DisplayAlerts = False
+
+On Error GoTo err
+
+Set myWB = ThisWorkbook
+statName = myWB.Path & "\" & "PFstat" & ".xls"
+Set statWB = Application.Workbooks.Open(statName)
+
+last_row_stat = statWB.Worksheets(1).Cells(Rows.Count, "G").End(xlUp).Row - 7
+
+Set ws = statWB.Worksheets(1)
+
+
+For i = 23 To last_row_stat
+
+ws.Range("I" & i).Value = "HDFC"
+ws.Range("H" & i).Value = Application.WorksheetFunction.Concat(ws.Range("A" & i).Value, ws.Range("B" & i).Value, ws.Range("C" & i).Value, ws.Range("D" & i).Value, ws.Range("E" & i).Value, ws.Range("F" & i).Value, ws.Range("G" & i).Value)
+
+Next i
+
+
+
+Set copy_rng = statWB.Worksheets(1).Range("A23:I600")
+copy_rng.Copy
+
+last_row = myWB.Worksheets("All Data").Cells(Rows.Count, "A").End(xlUp).Row + 1
+
+With myWB
+.Worksheets("All Data").Range("A" & last_row).PasteSpecial Paste:=xlPasteValues
+.Worksheets("All Data").Range("A:P").RemoveDuplicates Columns:=8, Header:=xlNo
+.SaveAs Filename:=statName, FileFormat:=xlstat, CreateBackup:=False
+.Close
+End With
+
+Workbooks("PFstat.xls").Close SaveChanges:=False
+
+err:
+Application.DisplayAlerts = True
+
+
+
+End Sub
